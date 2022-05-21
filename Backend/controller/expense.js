@@ -2,9 +2,9 @@ const Expense = require('../models/expenses');
 const AWS = require('aws-sdk');
 
 function uploadToS3(data,filename){
-    const BUCKET_NAME = 'codename24-expensetracker';
-    const IAM_USER_KEY = 'AKIAU2MWJDBH65KVAKFJ';
-    const IAM_USER_SECRET = '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';
+    const BUCKET_NAME = process.env.BUCKET_NAME;
+    const IAM_USER_KEY = process.env.IAM_USER_KEY;
+    const IAM_USER_SECRET = process.env.IAM_USER_SECRET;
 
     let s3bucket = new AWS.S3({
         accessKeyId: IAM_USER_KEY,

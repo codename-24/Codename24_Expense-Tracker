@@ -13,7 +13,7 @@ document.getElementById('rzp-button1').onclick = async function (e) {
      "contact": "2424242424"
    },
    "theme": {
-    "color": "#3399cc"
+    "color": "#282928"
    },
    "handler": function (response) {
        console.log(response);
@@ -33,11 +33,5 @@ e.preventDefault();
 
 rzp1.on('payment.failed', function (response){
 alert(response.error.code);
-alert(response.error.description);
-alert(response.error.source);
-alert(response.error.step);
-alert(response.error.reason);
-alert(response.error.metadata.order_id);
-alert(response.error.metadata.payment_id);
 });
 }
