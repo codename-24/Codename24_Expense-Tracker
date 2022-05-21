@@ -8,6 +8,7 @@ function login(e) {
     console.log(loginDetails)
     axios.post('http://localhost:3000/user/login',loginDetails).then(response => {
         if(response.status === 200){
+            console.log(response);
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('userDetails', JSON.stringify(response.data.user))
             window.location.href = "./dashboard.html" 

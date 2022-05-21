@@ -1,4 +1,61 @@
 const Expense = require('../models/expenses');
+const AWS = require('aws-sdk');
+
+function uploadToS3(data,filename){
+    const BUCKET_NAME = 'codename24-expensetracker';
+    const IAM_USER_KEY = 'AKIAU2MWJDBH65KVAKFJ';
+    const IAM_USER_SECRET = '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';
+
+    let s3bucket = new AWS.S3({
+        accessKeyId: IAM_USER_KEY,
+        secretAccessKey: IAM_USER_SECRET,
+    })
+
+    var params = {
+        Bucket: BUCKET_NAME,
+        Key:filename,
+        Body: data,
+        ACL: 'public-read'
+    }
+    return new Promise((resolve,reject)=>{
+        s3bucket.upload(params,(err,s3response)=>{
+            if(err) {
+                console.log('error', err);
+                reject(err);
+            }
+            else{
+                //console.log('success', s3response);
+                resolve(s3response.Location);
+            }
+        })
+
+    })
+    
+
+}
+
+const downloadexpense = async(req,res)=>{
+    try{
+        const expenses = await req.user.getExpenses();
+    //console.log(expenses);
+    const stringifiedExpenses = JSON.stringify(expenses);
+    const userId = req.user.id;
+    const filename = `report${userId}/${new Date()}.txt`;
+    const fileURL = await uploadToS3(stringifiedExpenses,filename);
+    res.status(200).json({fileURL, success: true})
+
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({fileURL:'', success:false, err:err})
+
+    }
+
+
+    
+
+
+}
 
 const addexpense = (req, res) => {
     const { expenseamount, description, category } = req.body;
@@ -29,8 +86,12 @@ const deleteexpense = (req, res) => {
     })
 }
 
+
+
+
 module.exports = {
     deleteexpense,
     getexpenses,
-    addexpense
+    addexpense,
+    downloadexpense
 }

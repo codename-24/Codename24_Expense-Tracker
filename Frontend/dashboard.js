@@ -1,10 +1,9 @@
+
 function handleLogout(e){
   localStorage.removeItem('token');
   window.location.href = "./login.html" 
   
 }
-
-
 function addNewExpense(e){
     e.preventDefault();
     const form = new FormData(e.target);
@@ -43,12 +42,17 @@ function addNewExpensetoUI(expense){
     const parentElement = document.getElementById('listOfExpenses');
     const expenseElemId = `expense-${expense.id}`;
     parentElement.innerHTML += `
-        <li id=${expenseElemId}>
-            <span>${expense.expenseamount}&nbsp&nbsp&nbsp&nbsp&nbsp</span><span> ${expense.category}&nbsp&nbsp&nbsp&nbsp&nbsp</span><span>  ${expense.description}&nbsp&nbsp&nbsp&nbsp&nbsp</span>
-            <button class= "tablebutton" onclick='deleteExpense(event, ${expense.id})'>
-                X
-            </button>
-        </li>`
+
+        <tr class="expensetransaction" id=${expenseElemId}>
+        <td class="expensetransactiondata" style="height:2px;">${expense.expenseamount}</td>
+        <td class="expensetransactiondata">${expense.category}</td>
+        <td class="expensetransactiondata">${expense.description}</td>
+        <td><button class= "tablebutton" onclick='deleteExpense(event, ${expense.id})'>
+        X
+    </button></td>
+        </tr>
+        
+        `
 }
 function deleteExpense(e, expenseid) {
     const token = localStorage.getItem('token');
@@ -68,4 +72,23 @@ function showError(err){
 function removeExpensefromUI(expenseid){
     const expenseElemId = `expense-${expenseid}`;
     document.getElementById(expenseElemId).remove();
+}
+
+function download(){
+    const token = localStorage.getItem('token');
+    axios.get('http://localhost:3000/user/download', { headers: {"Authorization" : token} })
+    .then((response) => {
+        if(response.status === 200){
+            var a = document.createElement("a");
+            a.href = response.data.fileURL;
+            a.download = 'My_Expense_CD24.csv';
+            a.click();
+        } else {
+            throw new Error(response.data.message)
+        }
+
+    })
+    .catch((err) => {
+        showError(err)
+    });
 }

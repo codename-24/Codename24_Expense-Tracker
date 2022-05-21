@@ -17,7 +17,7 @@
     <div id="sidebar">
         <ul id="menuitems">
             <a href="dashboard.html"><li><i class="fa-solid fa-chart-line"></i>&nbsp&nbspDashboard</li></a>
-            <a href="#"><li><i class="fa-solid fa-building-columns"></i>&nbsp&nbspBank Details</li></a>
+            <a href="report.html" ><li><i class="fa-solid fa-building-columns"></i>&nbspGen.&nbspReport</li></a>
             <a href="membership.html"><li><i class="fa-solid fa-money-check-dollar"></i>&nbspBuy&nbspPremium</li></a>
             <a href="#"><li><i class="fa-solid fa-face-smile-beam"></i>&nbsp&nbspAbout us</li></a> 
         </ul>
@@ -44,38 +44,38 @@
             </div>
         </div>
         <div id="dashboard-body-left">
-            <table>
+            <table class="dashboardtable">
                 <tr>
-                    <th>INCOME</th>
-                    <th>20000</th>
+                    <th class="dashboardtablehead">INCOME</th>
+                    <th class="dashboardtablehead">20000</th>
                 </tr>
                 <tr>
-                    <td>My wallet</td>
-                    <td>5000</td>
+                    <td class="dashboardtabledata">My wallet</td>
+                    <td class="dashboardtabledata">5000</td>
                 </tr>
                 <tr>
-                    <th>BANK ACCOUNT</th>
-                    <th>40000</th>
+                    <th class="dashboardtablehead">BANK ACCOUNT</th>
+                    <th class="dashboardtablehead"> 40000</th>
                 </tr>
                 <tr>
-                    <td>Savings</td>
-                    <td>20000</td>
+                    <td class="dashboardtabledata">Savings</td>
+                    <td class="dashboardtabledata">20000</td>
                 </tr>
                 <tr>
-                    <td>Salary account</td>
-                    <td>20000</td>
+                    <td class="dashboardtabledata">Salary account</td>
+                    <td class="dashboardtabledata">20000</td>
                 </tr>
                 <tr>
-                    <th>CARD</th>
-                    <th>0</th>
+                    <th class="dashboardtablehead">CARD</th>
+                    <th class="dashboardtablehead">0</th>
                 </tr>
                 <tr>
-                    <td>MasterCard **803</td>
-                    <td>0</td>
+                    <td class="dashboardtabledata">MasterCard **803</td>
+                    <td class="dashboardtabledata">0</td>
                 </tr>
                 <tr>
-                    <td>Visa **438</td>
-                    <td>0</td>
+                    <td class="dashboardtabledata">Visa **438</td>
+                    <td class="dashboardtabledata">0</td>
                 </tr>
             </table>
 
@@ -103,10 +103,10 @@
             </div>
             <div id="body-right-transaction">
                 <p>Recent Transactions</p>
-                
-                <ul id='listOfExpenses'>
+                <table id="listOfExpenses" class="transactiontable">
 
-                </ul>
+                </table>
+                
                 
             </div>
             
