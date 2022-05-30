@@ -5,7 +5,6 @@ const sequelize = require('./database/db-config');
 const User = require('./models/users');
 const Expense = require('./models/expenses');
 const Order = require('./models/orders');
-
 const userRoutes = require('./routes/user')
 const purchaseRoutes = require('./routes/purchase')
 
@@ -30,7 +29,7 @@ Order.belongsTo(User);
 
 sequelize.sync()
     .then(() => {
-        app.listen(3000);
+        app.listen(process.env.PORT || 3000);
     })
     .catch(err => {
         console.log(err);

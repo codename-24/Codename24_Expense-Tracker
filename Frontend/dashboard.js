@@ -1,3 +1,32 @@
+const chk = document.getElementById('chk');
+const lightdark = document.getElementById('lightdark')
+chk.addEventListener('change', () => {
+    
+	document.body.classList.toggle('dark');
+});
+
+//checkpremium
+
+let prem = async function ispremium(){
+    const token = localStorage.getItem('token');
+    await axios.get('http://localhost:3000/purchase/ispremium', { headers: {"Authorization" : token} })
+    .then((response) => {
+        if(response.status === 200){
+            lightdark.style.display='block';
+            
+        } else {
+            lightdark.style.display='none';
+        }
+
+    })
+    .catch((err) => {
+        showError(err)
+    });
+}
+
+
+
+//
 
 function handleLogout(e){
   localStorage.removeItem('token');
@@ -92,3 +121,7 @@ function download(){
         showError(err)
     });
 }
+
+//testing
+
+
